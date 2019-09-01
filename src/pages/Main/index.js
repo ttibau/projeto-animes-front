@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { Layout, Menu, Icon, Button } from 'antd';
 import { CreatePastime } from '../../components/'
 const { Header, Sider, Content } = Layout;
@@ -6,7 +6,6 @@ const { Header, Sider, Content } = Layout;
 export default function Main(){
     const [collapsed, setCollapsed] = useState(false)
     const [modalVisible, setModalVisible] = useState(false)
-    const formRef = useRef(null)
 
     function showModal() {
         setModalVisible(true)
@@ -14,23 +13,6 @@ export default function Main(){
 
     function handleCancel(){
         setModalVisible(false)
-    }
-
-    function handleCreate() {
-        // const { form } = this.formRef.props
-        // form.validateFields((err, values) => {
-        //     if (err) {
-        //         return
-        //     }
-
-        //     console.log('Received values of form: ', values)
-        //     form.resetFields()
-        //     setModalVisible(false)
-        // })
-    }
-
-    function saveFormRef(formRef) {
-        
     }
 
     const toggleMenu = () => {
@@ -78,7 +60,6 @@ export default function Main(){
                     <CreatePastime
                         visible={modalVisible}
                         onCancel={handleCancel}
-                        onCreate={handleCreate}
                     />
                 </Content>
             </Layout>

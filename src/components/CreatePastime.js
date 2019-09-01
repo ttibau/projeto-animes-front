@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {  Modal, Form, Input, Radio, Button, Upload, Icon, message, InputNumber } from 'antd'
+import { TagInput } from '../components'
 const { TextArea } = Input
 
 export default function PastimeForm({ visible, onCancel, onCreate, form }) {
@@ -59,13 +60,6 @@ export default function PastimeForm({ visible, onCancel, onCreate, form }) {
                         <Radio value={1}>Upload</Radio>
                     </Radio.Group>
                 </Form.Item>
-                <Form.Item label="Dublado/Legendado" >
-                    <Radio.Group onChange={e => changeDubbedSubtitled(e)} value={dubbedSubtitled}>
-                        <Radio value={0}>Dublado</Radio>
-                        <Radio value={1}>Legendado</Radio>
-                        <Radio value={2}>Ambos</Radio>
-                    </Radio.Group>
-                </Form.Item>
                 {imageLinkFlag === 0 &&
                     <Form.Item>
                         <Input placeholder="http:// ...  ..." />
@@ -80,11 +74,21 @@ export default function PastimeForm({ visible, onCancel, onCreate, form }) {
                         </Upload>
                     </Form.Item>
                 }
+                <Form.Item label="Dublado/Legendado" >
+                    <Radio.Group onChange={e => changeDubbedSubtitled(e)} value={dubbedSubtitled}>
+                        <Radio value={0}>Dublado</Radio>
+                        <Radio value={1}>Legendado</Radio>
+                        <Radio value={2}>Ambos</Radio>
+                    </Radio.Group>
+                </Form.Item>
                 <Form.Item label="Quantidade de episódios">
                     <InputNumber />
                 </Form.Item>
+                <Form.Item>
+                    <TagInput />
+                </Form.Item>
                 <Button type="primary" loading={submitLoading} onClick={() => setSubmitLoading(true)}>
-                    Salvar!
+                    Salvar
                 </Button>
             </Form>
         </Modal>
