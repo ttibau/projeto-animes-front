@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Layout, Menu, Icon, Button } from 'antd';
-import { CreatePastime } from '../../components/'
+import { CreatePastime, PastimeTable } from '../../components/'
 const { Header, Sider, Content } = Layout;
 
 export default function Main(){
@@ -61,6 +61,7 @@ export default function Main(){
                         visible={modalVisible}
                         onCancel={handleCancel}
                     />
+                    <PastimeTable />
                 </Content>
             </Layout>
       </Layout>
