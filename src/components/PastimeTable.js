@@ -34,6 +34,7 @@ export default function PastimeTable() {
         title: 'Tags',
         key: 'tags',
         dataIndex: 'tags',
+        align: 'center', 
         render: tags => (
           <span>
             {tags.map(tag => {
@@ -59,13 +60,13 @@ export default function PastimeTable() {
           <span>
             {value === 0 &&
               <Tooltip title="Dublado">
-                <Icon type="file-text" />
+                <Icon type="sound" />
               </Tooltip>
             }
 
             {value === 1 &&
               <Tooltip title="Legendado">
-                <Icon type="sound" />
+                <Icon type="file-text" />
               </Tooltip>
             }
 
@@ -88,9 +89,9 @@ export default function PastimeTable() {
         key: 'action',
         render: (text, record) => (
           <span>
-            <a>Invite {record.name}</a>
+            <a>Editar</a>
             <Divider type="vertical" />
-            <a>Delete</a>
+            <a>Apagar</a>
           </span>
         ),
       },
@@ -112,7 +113,7 @@ export default function PastimeTable() {
             description: 'Lorem impsun dolor sit amet, alo globo até mais',
             picture: 'https://fakeimg.pl/250x100/',
             tags: ['nic1e', 'deve1loper'],
-            isDubbed: 2,
+            isDubbed: 1,
             episodesCount: 762,
         },
         {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Layout, Menu, Icon, Button } from 'antd';
+import { Layout, Menu, Icon, Button, Breadcrumb } from 'antd';
 import { CreatePastime, PastimeTable } from '../../components/'
 const { Header, Sider, Content } = Layout;
 
@@ -39,11 +39,11 @@ export default function Main(){
             </Menu>
             </Sider>
             <Layout>
-                <Header style={{ background: '#fff' }}>
+                <Header style={{ background: '#fff', flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Icon
-                    className="trigger"
-                    type={collapsed ? 'menu-unfold' : 'menu-fold'}
-                    onClick={() => toggleMenu()}
+                        className="trigger"
+                        type={collapsed ? 'menu-unfold' : 'menu-fold'}
+                        onClick={() => toggleMenu()}
                     />
                 </Header>
                 <Content
