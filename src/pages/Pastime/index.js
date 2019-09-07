@@ -1,21 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import { Layout, Menu, Icon, Button } from 'antd'
-import { CreatePastime, PastimeTable } from '../../components'
+import { CreatePastime, PastimeTable, Unauthorized } from '../../components'
 import { Link } from 'react-router-dom'
 import { getPastimes } from '../../services/api/'
+import { useDispatch } from 'react-redux'
 
 const { Header, Sider, Content } = Layout;
 
 export default function Pastime(){
     const [collapsed, setCollapsed] = useState(false)
     const [modalVisible, setModalVisible] = useState(false)
+    const dispatch = useDispatch()
+
+    function showModalError(number, title, subtitle) {
+        dispatch({ type: 'SHOW_MODAL_ERROR', modalErrorContent: {
+            errorNumber: number, 
+            errorTitle: title, 
+            errorSubtitle: subtitle
+        }})
+    }
 
     useEffect(() => {
-    
         async function fetchPastimes() {
-            let response = await getPastimes()
-            let pastimes = response.data 
-            console.log(pastimes)
+            try {
+                let response = await getPastimes()
+                let pastimes = response.data 
+                console.log(pastimes)
+            }
+            catch(e) {
+                if(e.response.status === 401) {
+                    showModalError(500, 'Ocorreu algum erro', e.response.data.error)
+                }
+                console.log(e.response)
+            }
         }
 
         fetchPastimes()
@@ -35,6 +52,7 @@ export default function Pastime(){
 
     return(
         <Layout style={{ height:"100vh" }}>
+            <Unauthorized />
             <Sider trigger={null} collapsible collapsed={collapsed}>
             <div className="logo" />
             <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
@@ -72,7 +90,7 @@ export default function Pastime(){
                     minHeight: 280,
                     }}
                 >
-                    <Button icon="plus" type="primary" onClick={() => showModal()}>
+                    <Button icon="plus" type="primary" onClick={() => showModalError()}>
                         Novo
                     </Button>
                     <CreatePastime
