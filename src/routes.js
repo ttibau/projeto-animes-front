@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { isAuthenticated } from './services/auth'
-import { Main, Login } from './pages'
+import { Pastime, Login } from './pages'
 
 const PrivateRoute = ({ component: Component, ...rest}) => (
     <Route {...rest} render={props => (
@@ -17,9 +17,9 @@ function Routes() {
     return(
         <BrowserRouter>
             <Switch>
-                <Route exact path='/main' component={Main} />
+                <Route exact path='/pastime' component={Pastime} />
                 <Route exact path='/login' component={Login} />
-                <PrivateRoute path='/main' component={Main} />
+                <PrivateRoute path='/' component={Pastime} />
             </Switch>
         </BrowserRouter>
     )
