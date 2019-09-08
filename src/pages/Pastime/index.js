@@ -16,7 +16,8 @@ export default function Pastime(){
         dispatch({ type: 'SHOW_MODAL_ERROR', modalErrorContent: {
             errorNumber: number, 
             errorTitle: title, 
-            errorSubtitle: subtitle
+            errorSubtitle: subtitle,
+            redirectTo: '/login'
         }})
     }
 

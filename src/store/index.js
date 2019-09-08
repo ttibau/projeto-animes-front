@@ -6,7 +6,8 @@ const INITIAL_STATE = {
     modalErrorContent: {
         errorNumber: null, 
         errorTitle: null, 
-        errorSubtitle: null
+        errorSubtitle: null,
+        redirectTo: null  //todo modal error tem um botão que vai redirecionar para algum canto
     }
 }
 
@@ -14,7 +15,6 @@ const INITIAL_STATE = {
 function reducer(state=INITIAL_STATE, action) {
     switch(action.type) {
         case 'SHOW_MODAL_ERROR' :
-            debugger
             return {...state, showModalError: true, modalErrorContent: action.modalErrorContent }  
         case 'CLOSE_MODAL':
             return {...state, showModalError: false }
