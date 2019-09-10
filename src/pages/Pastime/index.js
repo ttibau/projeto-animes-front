@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Layout, Menu, Icon, Button } from 'antd'
-import { CreatePastime, PastimeTable, Unauthorized } from '../../components'
+import { CreatePastime, PastimeTable, ModalError } from '../../components'
 import { Link } from 'react-router-dom'
 import { getPastimes } from '../../services/api/'
 import { useDispatch } from 'react-redux'
@@ -30,7 +30,7 @@ export default function Pastime(){
             }
             catch(e) {
                 if(e.response.status === 401) {
-                    showModalError(500, 'Ocorreu algum erro', e.response.data.error)
+                    showModalError(e.response.status, 'Ocorreu algum erro', e.response.data.error)
                 }
                 console.log(e.response)
             }
@@ -53,7 +53,7 @@ export default function Pastime(){
 
     return(
         <Layout style={{ height:"100vh" }}>
-            <Unauthorized />
+            <ModalError />
             <Sider trigger={null} collapsible collapsed={collapsed}>
             <div className="logo" />
             <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
