@@ -10,6 +10,7 @@ const { Header, Sider, Content } = Layout;
 export default function Pastime(){
     const [collapsed, setCollapsed] = useState(false)
     const [modalVisible, setModalVisible] = useState(false)
+    const [pastimesList, setPastimesList] = useState([])
     const dispatch = useDispatch()
 
     function showModalError(number, title, subtitle) {
@@ -26,8 +27,8 @@ export default function Pastime(){
             try {
                 let user = JSON.parse(localStorage.getItem('userInfo'))
                 let response = await getPastimes(user.token)
-                let pastimes = response.data 
-                console.log(pastimes)
+                let pastimes = response.data.pastimes
+                setPastimesList(pastimes)
             }
             catch(e) {
                 if(e.response) {
@@ -37,7 +38,7 @@ export default function Pastime(){
                 } else {
                     showModalError(500, 'Ocorreu um erro', 'Algo deu errato, tente novamente.')
                 }
-                console.log(e.response)
+                console.log(e)
             }
         }
 
@@ -96,7 +97,7 @@ export default function Pastime(){
                     minHeight: 280,
                     }}
                 >
-                    <Button icon="plus" type="primary" onClick={() => showModalError()}>
+                    <Button icon="plus" type="primary" onClick={() => showModal()}>
                         Novo
                     </Button>
                     <CreatePastime
