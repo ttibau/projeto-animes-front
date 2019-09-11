@@ -24,13 +24,18 @@ export default function Pastime(){
     useEffect(() => {
         async function fetchPastimes() {
             try {
-                let response = await getPastimes()
+                let user = JSON.parse(localStorage.getItem('userInfo'))
+                let response = await getPastimes(user.token)
                 let pastimes = response.data 
                 console.log(pastimes)
             }
             catch(e) {
-                if(e.response.status === 401) {
-                    showModalError(e.response.status, 'Ocorreu algum erro', e.response.data.error)
+                if(e.response) {
+                    if(e.response.status === 401) {
+                        showModalError(e.response.status, 'Ocorreu algum erro', e.response.data.error)
+                    }
+                } else {
+                    showModalError(500, 'Ocorreu um erro', 'Algo deu errato, tente novamente.')
                 }
                 console.log(e.response)
             }
