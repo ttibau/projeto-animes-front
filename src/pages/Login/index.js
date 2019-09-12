@@ -34,10 +34,12 @@ export default function Login() {
                 setShowRedirect(true)
             }
         } catch (e) {
-            debugger
+            if(e.response) {
+                showModalError(e.response.status, 'Erro ao logar', e.response.data.error)
+            } else {
+                showModalError(500, 'Erro ao logar', 'Tente mais tarde')
+            }
             setBtnLoading(false)
-            showModalError(e.response.status, 'Erro ao logar', e.response.data.error)
-            console.log(e)
         }
     }
     function setEmail(e) {
